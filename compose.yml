@@ -4,7 +4,6 @@ services:
   icecast:
     build:
       context: icecast/
-    image: alpine-icecast:custom
     ports:
       - "8000:8000"
     networks:
@@ -14,7 +13,6 @@ services:
   mpd:
     build:
       context: mpd/
-    image: alpine-mpd:custom
     ports:
       - "6600:6600"
     depends_on:
@@ -22,14 +20,13 @@ services:
     networks:
       - music_stack
     volumes:
-      - /path/to/mpd_music:/var/lib/mpd/music
-      - /path/to/mpd_playlists:/var/lib/mpd/playlists
-      - /path/to/mpd_database:/var/lib/mpd/database
+      - ./mpd_music:/var/lib/mpd/music
+      - ./mpd_playlists:/var/lib/mpd/playlists
+      - ./mpd_database:/var/lib/mpd/database
 
   sima:
     build:
       context: sima/
-    image: alpine-sima:custom
     depends_on:
       - mpd
     networks:
@@ -38,7 +35,6 @@ services:
   ympd:
     build:
       context: ympd/
-    image: alpine-ympd:custom
     ports:
       - "8080:8080"
     depends_on:

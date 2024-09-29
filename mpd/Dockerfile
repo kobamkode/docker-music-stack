@@ -1,8 +1,8 @@
-FROM alpine:3.3
+FROM alpine:latest
 MAINTAINER @VITIMan https://github.com/VITIMan 
 
-ENV MPD_VERSION 0.19.12-r0
-ENV MPC_VERSION 0.27-r0
+ENV MPD_VERSION 0.23.15-r2
+ENV MPC_VERSION 0.35-r0
 
 # https://docs.docker.com/engine/reference/builder/#arg
 ARG user=mpd
@@ -16,6 +16,7 @@ RUN apk -q update \
 RUN mkdir -p /var/lib/mpd/music \
     && mkdir -p /var/lib/mpd/playlists \
     && mkdir -p /var/lib/mpd/database \
+    && mkdir -p /var/lib/mpd/database/tag_cache \
     && mkdir -p /var/log/mpd/mpd.log \
     && chown -R ${user}:${group} /var/lib/mpd \
     && chown -R ${user}:${group} /var/log/mpd/mpd.log

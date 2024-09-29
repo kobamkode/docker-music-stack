@@ -1,9 +1,9 @@
-FROM alpine:3.3
+FROM alpine:latest
 MAINTAINER @VITIMan 
 
 # docker run -p 8080:8080 --net music_stack --name=ympd -d alpine-ympd:dev
 
-ENV YMPD_VERSION 1.3.0
+ENV YMPD_VERSION master
 
 ENV LIBMPDCLIENT_INCLUDE_DIR /usr/lib/libmpdclient.so.2
 
@@ -18,7 +18,7 @@ RUN apk -q update \
     && apk -q --no-progress add make
 
 
-RUN curl -fsSlL https://github.com/notandy/ympd/archive/v$YMPD_VERSION.tar.gz -o ympd.tar.gz \
+RUN curl -fsSlL https://github.com/SuperBFG7/ympd/archive/refs/heads/$YMPD_VERSION.tar.gz -o ympd.tar.gz \
     && tar -xzf ympd.tar.gz \
     && mkdir ympd-$YMPD_VERSION/build
 
